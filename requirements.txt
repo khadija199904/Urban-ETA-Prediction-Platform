@@ -2,8 +2,10 @@
 psycopg2-binary
 
 # Spark
-# pyspark
+pyspark
 
 pandas
 numpy
 scikit-learn
+matplotlib
+Seaborn
