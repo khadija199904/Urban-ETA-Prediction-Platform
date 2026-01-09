@@ -1,3 +1,5 @@
 .venv 
 __pycache__
 *.pyc
+metastore_db
+derby.log
