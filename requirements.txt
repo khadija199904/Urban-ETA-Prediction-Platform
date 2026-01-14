@@ -1,9 +1,15 @@
 # Airflow DB
 psycopg2-binary
+sqlalchemy
+python-dotenv 
 
 # Spark
-# pyspark
+pyspark
+
+
 
 pandas
 numpy
 scikit-learn
+matplotlib
+Seaborn
