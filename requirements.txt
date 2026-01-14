@@ -1,8 +1,12 @@
 # Airflow DB
 psycopg2-binary
+sqlalchemy
+python-dotenv 
 
 # Spark
 pyspark
+
+
 
 pandas
 numpy
