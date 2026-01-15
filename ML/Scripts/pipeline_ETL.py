@@ -1,6 +1,6 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, unix_timestamp, hour, dayofweek, month, mean, stddev, abs
-from database import engine
+from api.database import engine
 
 
 # -------------------------------- Initialiser Spark ---------------------------

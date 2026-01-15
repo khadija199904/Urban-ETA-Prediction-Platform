@@ -7,7 +7,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 from sklearn.pipeline import Pipeline
 import joblib 
-from database import engine
+from api.database import engine
 from math import sqrt
 
 

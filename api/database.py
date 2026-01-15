@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.pool import NullPool
+from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
 import os
 
@@ -20,6 +21,8 @@ DATABASE_URL = f"postgresql+psycopg2://{USER}:{PASSWORD}@{HOST}:{PORT}/{DBNAME}?
 
 
 engine = create_engine(DATABASE_URL, poolclass=NullPool)
+
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # Test the connection
 if __name__ == "__main__":
