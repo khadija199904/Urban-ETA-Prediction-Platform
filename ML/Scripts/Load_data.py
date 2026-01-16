@@ -1,13 +1,13 @@
 import os 
 
-def load_data(DATASET_PATH) :
+def load_data(DATA_PATH) :
     """
       téléchargement du dataset
     """
-    if not os.path.exists(DATASET_PATH):
-        raise FileNotFoundError(f"Dataset introuvable : {DATASET_PATH}")
+    if not os.path.exists(DATA_PATH):
+        raise FileNotFoundError(f"Dataset introuvable : {DATA_PATH}")
 
-    print(f" Dataset prêt : {DATASET_PATH}")
+    print(f" Dataset prêt : {DATA_PATH}")
 
 
 

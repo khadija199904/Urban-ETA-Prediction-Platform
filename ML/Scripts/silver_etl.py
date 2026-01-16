@@ -3,13 +3,13 @@ from spark_session import get_spark_session
 from api.database import engine
 
 
-def silver(BRONZE_PATH):
+def etl_pipeline(BRONZE_TAXI_PATH):
     """
     Nettoyage Silver + export PostgreSQL
     """
     spark = get_spark_session("Silver Taxi Processing")
    
-    silver_df = spark.read.parquet(BRONZE_PATH)
+    silver_df = spark.read.parquet(BRONZE_TAXI_PATH)
 
     # Supprimer doublons
     silver_df = silver_df.distinct()
