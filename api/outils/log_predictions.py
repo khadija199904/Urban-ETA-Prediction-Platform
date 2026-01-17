@@ -1,4 +1,4 @@
-from api.models.eta_predictions import ETAPrediction
+from api.models.history_predictions import ETAPrediction
 
 
 
