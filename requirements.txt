@@ -1,7 +1,6 @@
 # Airflow DB
 psycopg2-binary
-sqlalchemy
-python-dotenv 
+
 
 # Spark
 pyspark
@@ -14,3 +13,11 @@ scikit-learn
 matplotlib
 Seaborn
 joblib
+
+# fastapi
+sqlalchemy
+python-dotenv 
+fastapi 
+uvicorn
+passlib[argon2]
+python-jose
