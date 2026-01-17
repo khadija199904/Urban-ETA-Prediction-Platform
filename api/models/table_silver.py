@@ -3,7 +3,7 @@ from api.database import Base
 
 class SilverTaxi(Base):
     __tablename__ = "silver_taxi"
-    __table_args__ = {"schema": "silver", "extend_existing": True}
+    __table_args__ = {"schema": "public", "extend_existing": True}
 
     # Pas de clé primaire explicite dans Spark
     # → SQLAlchemy en a besoin
