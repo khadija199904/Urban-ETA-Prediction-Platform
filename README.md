@@ -1,8 +1,5 @@
-Voici une version complète, professionnelle et ultra-détaillée de votre fichier **README.md**. Elle est structurée pour mettre en valeur la complexité technique de votre projet (ETL distribué + ML + API sécurisée).
 
----
-
-# 🚀 Smart LogiTrack : Urban ETA Prediction Platform
+#  Smart LogiTrack : Urban ETA Prediction Platform
 
 [![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
 [![Apache Spark](https://img.shields.io/badge/Apache_Spark-E25A1C?style=for-the-badge&logo=apachespark&logoColor=white)](https://spark.apache.org/)
@@ -10,7 +7,7 @@ Voici une version complète, professionnelle et ultra-détaillée de votre fichi
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Scikit-Learn](https://img.shields.io/badge/Scikit_Learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
 [![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
-
+[![Python CI](https://github.com/votre_nom_utilisateur/Urban-ETA-Prediction-Platform/actions/workflows/ci.yml/badge.svg)](https://github.com/votre_nom_utilisateur/Urban-ETA-Prediction-Platform/actions/workflows/ci.yml)
 **Smart LogiTrack** est une plateforme de "Control Tower" logistique permettant de prédire le Temps d'Arrivée Estimé (ETA) des taxis urbains. Ce projet implémente un pipeline complet : de l'ingestion massive de données (Bronze) au nettoyage distribué (Silver), jusqu'au déploiement d'une API de prédiction haute performance.
 
 ---
@@ -113,6 +110,15 @@ Pour exécuter la suite de tests unitaires (avec mocks pour la DB et le Token) :
 ```bash
 pytest
 ```
+
+---
+## CI/CD (GitHub Actions)
+
+Ce projet utilise **GitHub Actions** pour l'Intégration Continue (CI). À chaque `push` sur la branche principale :
+1.  **Environnement** : Un conteneur Ubuntu est configuré avec Python 3.12.
+2.  **Dépendances** : Installation automatique de toutes les bibliothèques (`requirements.txt`).
+3.  **Tests** : Exécution automatique de la suite de tests **Pytest** (incluant les mocks de l'API et de la base de données).
+4.  **Qualité** : Vérification du succès des tests avant toute fusion (Pull Request).
 
 ---
 
