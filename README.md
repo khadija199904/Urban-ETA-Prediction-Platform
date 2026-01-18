@@ -82,6 +82,19 @@ L'API est sécurisée par **JWT (JSON Web Tokens)** et propose les services suiv
     *   `GET /analytics/payment-analysis` : Analyse de la durée moyenne selon le type de paiement.
 
 ---
+## Documentation de l'API
+
+L'API est entièrement documentée avec **Swagger** et **ReDoc**. Vous pouvez tester chaque endpoint directement depuis votre navigateur.
+
+### Aperçu de l'interface :
+<p align="center">
+  <img src="assets/swagger-ui.png" alt="FastAPI Swagger UI" width="900" style="border-radius: 10px; border: 1px solid #ddd;">
+</p>
+
+### Accès :
+*   **Swagger UI** : [http://localhost:8000/docs](http://localhost:8000/docs)
+*   **ReDoc** : [http://localhost:8000/redoc](http://localhost:8000/redoc)
+
 
 ##  Installation et Démarrage
 
