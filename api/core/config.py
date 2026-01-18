@@ -9,7 +9,7 @@ load_dotenv()
 USER = os.getenv("user", "postgres")
 PASSWORD = os.getenv("password", "password")
 HOST = os.getenv("host", "localhost")
-PORT = os.getenv("port", "5432")
+PORT = os.getenv("port", "6543")
 DBNAME = os.getenv("dbname", "test_db")
 
 
