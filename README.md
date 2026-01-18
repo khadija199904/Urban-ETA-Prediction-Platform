@@ -1,134 +1,133 @@
-# Urban-ETA-Prediction-Platform
-
-
-
-Voici une version formatée et optimisée pour un fichier **README.md** de ton dépôt GitHub. J'ai ajouté quelques éléments de mise en forme (badges, icônes et blocs de code clairs) pour rendre le guide plus professionnel.
+Voici une version complète, professionnelle et ultra-détaillée de votre fichier **README.md**. Elle est structurée pour mettre en valeur la complexité technique de votre projet (ETL distribué + ML + API sécurisée).
 
 ---
 
-# 🚀 Guide de Configuration : WSL, Python & VS Code
+# 🚀 Smart LogiTrack : Urban ETA Prediction Platform
 
-Ce guide explique comment configurer un environnement de développement professionnel sous Windows en utilisant **WSL (Ubuntu)**, **Git**, et **Python**, puis comment lier le tout à **VS Code**.
+[![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
+[![Apache Spark](https://img.shields.io/badge/Apache_Spark-E25A1C?style=for-the-badge&logo=apachespark&logoColor=white)](https://spark.apache.org/)
+[![Apache Airflow](https://img.shields.io/badge/Apache_Airflow-017CEE?style=for-the-badge&logo=apacheairflow&logoColor=white)](https://airflow.apache.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Scikit-Learn](https://img.shields.io/badge/Scikit_Learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
+[![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 
----
-
-## 🖥️ Prérequis
-
-Avant de commencer, assurez-vous d'avoir :
-*   **Windows 10 ou 11** (à jour).
-*   **VS Code** installé sur Windows.
-*   Un compte **GitHub**.
-*   Une connexion Internet stable.
+**Smart LogiTrack** est une plateforme de "Control Tower" logistique permettant de prédire le Temps d'Arrivée Estimé (ETA) des taxis urbains. Ce projet implémente un pipeline complet : de l'ingestion massive de données (Bronze) au nettoyage distribué (Silver), jusqu'au déploiement d'une API de prédiction haute performance.
 
 ---
 
-## 1️⃣ Installation de WSL & Ubuntu
+##  Architecture du Système
 
-Ouvrez **PowerShell** en mode **Administrateur** et lancez :
-
-```powershell
-wsl --install
-sudo apt update
-sudo apt install openjdk-17-jdk -y
-
-```
-
-> [!IMPORTANT]
-> Cette commande installe WSL et la distribution Ubuntu par défaut. **Redémarrez votre PC** après l'exécution pour finaliser l'installation.
+Le projet est construit sur une architecture  :
+1.  **Ingestion (Bronze)** : Récupération automatique du dataset Taxi via Airflow.
+2.  **Transformation (Silver)** : Nettoyage et Feature Engineering avec **PySpark** pour une scalabilité maximale.
+3.  **Machine Learning** : Entraînement et comparaison de modèles (Spark ML vs Scikit-Learn).
+4.  **Service (API)** : API REST (FASTAPI) sécurisée par JWT offrant des prédictions et des analyses analytiques.
+5.  **Orchestration** : Gestion des tâches via Apache Airflow.
 
 ---
 
-## 2️⃣ Configuration de Linux (Ubuntu)
+##  Structure du Projet
 
-1.  Lancez **Ubuntu** depuis le menu Démarrer.
-2.  Créez votre **nom d'utilisateur** et votre **mot de passe** (ils sont indépendants de Windows).
-3.  Une fois l'invite `username@DESKTOP:~$` affichée, mettez le système à jour :
-
-```bash
-sudo apt update && sudo apt upgrade -y
-```
-
----
-
-## 3️⃣ Installation des outils (Git & Python)
-
-### Git
-```bash
-sudo apt install git -y
-# Vérification
-git --version
-```
-
-### Python & Pip
-```bash
-sudo apt install python3 python3-pip python3-venv -y
-# Vérification
-python3 --version
-```
-
-### Gitflow (Optionnel)
-```bash
-sudo apt install git-flow-avh -y
+```text
+├── api/                # Application Backend FastAPI
+│   ├── core/           # Config (DB, JWT), Sécurité (hashing, verify-token)
+│   ├── routers/        # Endpoints (Predict, Analytics, Auth)
+│   ├── crud/           # Logique d'accès aux données (user.py)
+│   ├── models/         # Modèles SQLAlchemy (history_predictions.py, users.py)
+│   ├── outils/         # Utilitaires (execute_query, load_model, log_predictions)
+│   ├── schemas/        # Validation Pydantic (predict_schema, users_schema)
+│   ├── services/       # Logique métier (prediction.py)
+│   ├── database.py     # Connexion Base de Données
+│   ├── dependeces.py   # Injection de dépendances (get_db)
+│   └── main.py         # Point d'entrée API
+├── dags/               # Pipelines d'orchestration Apache Airflow
+├── ML/                 # Scripts d'entraînement et recherche de modèles
+│   ├── models_pkl/         # Modèles ML sérialisés (.pkl)
+│   ├── notebooks/          # Exploration de données & prototypes Spark
+│   └── Scripts/            # Fonctions utilitaires pour les DAGs Airflow
+├── Tests/              # Tests unitaires et d'intégration (Pytest)
+├── data/               # Stockage local des données (Bronze/Silver)
+├── docker-compose.yml  # Orchestration des conteneurs
+├── Dockerfile          # Configuration de l'image Docker API
+├── .gitignore          # Fichiers à exclure de Git
+├── .dockerignore       # Fichiers à exclure de l'image Docker
+├── init_airflow.sh     # Script d'initialisation Airflow
+└── requirements.txt    # Dépendances Python
 ```
 
 ---
 
-## 4️⃣ Préparation du projet
+##  Performance du Machine Learning
 
-### Création de l'espace de travail
-Il est fortement recommandé de travailler dans le système de fichiers Linux.
+Nous avons mené une étude comparative entre deux approches pour prédire la durée du trajet (`trip_duree`) :
 
-```bash
-cd ~
-mkdir projects
-cd projects
-```
+| Framework | Modèle | R² | RMSE |
+| :--- | :--- | :--- | :--- |
+| **Scikit-Learn** | **Random Forest Regressor** | **0.96** | **1.40** |
+| Apache Spark | GBTRegressor | 0.93 | 1.88 |
 
-### Récupération du dépôt
-```bash
-git clone https://github.com/VOTRE_NOM_UTILISATEUR/NOM_DU_REPO.git
-cd NOM_DU_REPO
-```
-
-> [!WARNING]
-> **Ne travaillez pas dans `/mnt/c/...`** (disque Windows). Cela ralentit considérablement les performances de Python et Git. Utilisez toujours `/home/votre_nom/...`.
+> **Le modèle Random Forest (Sklearn)** a été choisi pour la production car il offre la meilleure précision et une latence de prédiction plus faible pour l'API.
 
 ---
 
-## 5️⃣ Environnement Virtuel Python
+##  Fonctionnalités de l'API
 
-Configurez un environnement isolé pour votre projet :
+L'API est sécurisée par **JWT (JSON Web Tokens)** et propose les services suivants :
 
+*   **Auth** : Inscription (`/register`) et Connexion (`/login`).
+*   **Predictions** : 
+    *   `POST /predict` : Reçoit les caractéristiques du trajet et renvoie la durée estimée.
+    *   Historisation automatique de chaque requête dans la table `history_predictions`.
+*   **Analytics** :
+    *   `GET /analytics/avg-duration-by-hour` : Durée moyenne des trajets par heure.
+    *   `GET /analytics/payment-analysis` : Analyse de la durée moyenne selon le type de paiement.
+
+---
+
+##  Installation et Démarrage
+
+### 1. Prérequis
+*   Windows avec **WSL2** ou Linux.
+*   **Docker** & **Docker Compose**.
+
+### 2. Installation locale
 ```bash
-# Créer l'environnement
+# Cloner le projet
+git clone https://github.com/khadija199904/Urban-ETA-Prediction-Platform.git
+cd Urban-ETA-Prediction-Platform
+
+# Créer un environnement virtuel
 python3 -m venv .venv
-
-# Activer l'environnement
 source .venv/bin/activate
-```
-
-Une fois activé, mettez à jour `pip` et installez vos dépendances :
-```bash
-pip install --upgrade pip
-# Si vous avez un fichier requirements.txt :
 pip install -r requirements.txt
 ```
 
----
-
-## 6️⃣ Intégration avec VS Code
-
-1.  Sur Windows, ouvrez VS Code.
-2.  Allez dans les **Extensions** (`Ctrl + Shift + X`).
-3.  Cherchez et installez l'extension **"WSL"** (éditée par Microsoft).
-4.  Revenez dans votre terminal Ubuntu, à l'intérieur du dossier de votre projet, et tapez :
-
+### 3. Lancement des services
 ```bash
-code .
+# Lancer Postgres, Airflow et l'API en arrière-plan
+docker-compose up -d
 ```
 
-
+### 4. Tests
+Pour exécuter la suite de tests unitaires (avec mocks pour la DB et le Token) :
+```bash
+pytest
+```
 
 ---
 
+## Stack Technologique
+*   **Backend** : FastAPI, SQLAlchemy, Pydantic, JWT.
+*   **Big Data** : Apache Spark (PySpark), Apache Airflow.
+*   **Machine Learning** : Scikit-Learn (Random Forest), Spark MLlib.
+*   **DevOps** : Docker, Docker Compose, WSL2.
+*   **Base de données** : PostgreSQL.
 
+---
+
+##  Auteur
+**Khadija**
+*   [GitHub](https://github.com/khadija199904)
+*   [Projet Repository](https://github.com/khadija199904/Urban-ETA-Prediction-Platform)
+
+*Ce projet a été réalisé dans le cadre de la certification Développeur en Intelligence Artificielle.*
