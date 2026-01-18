@@ -90,8 +90,32 @@ L'API est sécurisée par **JWT (JSON Web Tokens)** et propose les services suiv
 *   **Docker** & **Docker Compose**.
 
 ### 2. Installation locale
+ * Si vous avez Windows, Ouvrez **PowerShell** en mode **Administrateur** et lancez :
 ```bash
-# Cloner le projet
+```powershell
+wsl --install
+sudo apt update
+sudo apt install openjdk-17-jdk -y
+
+```
+> [!IMPORTANT]
+> Cette commande installe WSL et la distribution Ubuntu par défaut. **Redémarrez votre PC** après l'exécution pour finaliser l'installation.
+#### Installation des outils (Git & Python)
+```bash
+sudo apt install python3 python3-pip python3-venv git -y
+
+```
+#### Préparation du projet :
+```bash
+cd ~
+mkdir projects
+cd projects
+```
+> [!WARNING]
+> **Ne travaillez pas dans `/mnt/c/...`** (disque Windows). Cela ralentit considérablement les performances de Python et Git. Utilisez toujours `/home/votre_nom/...`.
+#### Cloner le projet
+```bash
+
 git clone https://github.com/khadija199904/Urban-ETA-Prediction-Platform.git
 cd Urban-ETA-Prediction-Platform
 
@@ -101,6 +125,16 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+#### Intégration avec VS Code
+
+1.  Sur Windows, ouvrez VS Code.
+2.  Allez dans les **Extensions** (`Ctrl + Shift + X`).
+3.  Cherchez et installez l'extension **"WSL"** (éditée par Microsoft).
+4.  Revenez dans votre terminal Ubuntu, à l'intérieur du dossier de votre projet, et tapez :
+
+```bash
+code .
+```
 ### 3. Lancement des services
 ```bash
 # Lancer Postgres, Airflow et l'API en arrière-plan
@@ -110,7 +144,7 @@ docker-compose up -d
 ### 4. Tests
 Pour exécuter la suite de tests unitaires (avec mocks pour la DB et le Token) :
 ```bash
-pytest
+pytest -v
 ```
 
 ---
