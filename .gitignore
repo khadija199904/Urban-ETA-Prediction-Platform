@@ -4,3 +4,4 @@ __pycache__
 metastore_db
 derby.log
 .env
+.pytest_cache
