@@ -39,6 +39,7 @@ jobs:
       env:
        
         PYTHONPATH: ${{ github.workspace }}
+        DATABASE_URL: sqlite:///:memory
         
       run: |
         # On lance pytest sur le dossier Tests
