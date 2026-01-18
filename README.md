@@ -8,6 +8,8 @@
 [![Scikit-Learn](https://img.shields.io/badge/Scikit_Learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
 [![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 [![Python CI](https://github.com/votre_nom_utilisateur/Urban-ETA-Prediction-Platform/actions/workflows/ci.yml/badge.svg)](https://github.com/votre_nom_utilisateur/Urban-ETA-Prediction-Platform/actions/workflows/ci.yml)
+
+##  Contexte General
 **Smart LogiTrack** est une plateforme de "Control Tower" logistique permettant de prédire le Temps d'Arrivée Estimé (ETA) des taxis urbains. Ce projet implémente un pipeline complet : de l'ingestion massive de données (Bronze) au nettoyage distribué (Silver), jusqu'au déploiement d'une API de prédiction haute performance.
 
 ---
