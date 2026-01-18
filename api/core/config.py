@@ -5,16 +5,20 @@ import os
 # Load environment variables from .env
 load_dotenv()
 
-# Fetch variables
-USER = os.getenv("user", "postgres")
-PASSWORD = os.getenv("password", "password")
-HOST = os.getenv("host", "localhost")
-PORT = os.getenv("port", "6543")
-DBNAME = os.getenv("dbname", "test_db")
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 
-# Construct the SQLAlchemy connection string
-DATABASE_URL = f"postgresql+psycopg2://{USER}:{PASSWORD}@{HOST}:{PORT}/{DBNAME}?sslmode=require"
+if not DATABASE_URL :
+    # Fetch variables
+     USER = os.getenv("user")
+     PASSWORD = os.getenv("password")
+     HOST = os.getenv("host")
+     PORT = os.getenv("port")
+     DBNAME = os.getenv("dbname")
+
+
+     # Construct the SQLAlchemy connection string
+     DATABASE_URL = f"postgresql+psycopg2://{USER}:{PASSWORD}@{HOST}:{PORT}/{DBNAME}?sslmode=require"
 
 
  # Configuration de JWT

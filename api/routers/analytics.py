@@ -12,7 +12,7 @@ router = APIRouter(tags=['Analytics'])
 
 
 @router.get('/analytics/avg-duration-by-hour')
-def moy_duree_par_heure(token=Depends(verify_token),db = Depends(get_db)):
+async def moy_duree_par_heure(token=Depends(verify_token),db = Depends(get_db)):
      
     try:
         user = db.query(USERS).filter(USERS.username == token['Username']).first()
