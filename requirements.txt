@@ -21,3 +21,6 @@ fastapi
 uvicorn
 passlib[argon2]
 python-jose
+
+pytest
+httpx

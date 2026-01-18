@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from api.database import Base, engine
 from api.routers import auth,predict,analytics
-# from api.routers import predict,generate_plan
 
 
 
